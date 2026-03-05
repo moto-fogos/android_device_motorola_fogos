@@ -103,6 +103,17 @@ on boot
     setprop vendor.usb.qdss.inst.name "qdss_mdm"
     setprop vendor.usb.controller 4e00000.dwc3
 
+    mkdir /dev/cpuset/surfaceflinger
+    write /dev/cpuset/surfaceflinger/cpus 4-7
+    write /dev/cpuset/surfaceflinger/mems 0
+    chown system system /dev/cpuset/surfaceflinger
+    chown system system /dev/cpuset/surfaceflinger/tasks
+    chown system system /dev/cpuset/surfaceflinger/cgroup.procs
+    # Set surfaceflinger to 0775 so SurfaceFlinger can touch it
+    chmod 0775 /dev/cpuset/surfaceflinger
+    chmod 0664 /dev/cpuset/surfaceflinger/tasks
+    chmod 0664 /dev/cpuset/surfaceflinger/cgroup.procs
+
 on boot && property:persist.vendor.usb.controller.default=*
     setprop vendor.usb.controller ${persist.vendor.usb.controller.default}
 

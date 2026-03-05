@@ -318,6 +318,9 @@ $(foreach DEVICE_SKU, $(DEVICE_SKUS), \
 PRODUCT_PACKAGES += \
     android.hardware.power-service-qti
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/power/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json
+
 $(call soong_config_set,qtipower,tap_to_wake_node,/sys/class/touchscreen/primary/gesture)
 
 # Properties
