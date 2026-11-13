@@ -20,16 +20,40 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
+    'device/motorola/fogos',
     'hardware/motorola',
-    'vendor/motorola/sm6375-common',
+    'hardware/qcom-caf/sm8350',
+    'hardware/qcom-caf/wlan',
+    'vendor/qcom/opensource/commonsys/display',
+    'vendor/qcom/opensource/commonsys-intf/display',
+    'vendor/qcom/opensource/dataservices',
     'vendor/qcom/opensource/display',
 ]
 
+def lib_fixup_vendor_suffix(lib: str, partition: str, *args, **kwargs):
+    return f'{lib}_{partition}' if partition == 'vendor' else None
+
 lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
+    (
+        'com.qualcomm.qti.dpm.api@1.0',
+        'libmmosal',
+        'vendor.qti.diaghal@1.0',
+        'vendor.qti.hardware.fm@1.0',
+        'vendor.qti.hardware.wifidisplaysession@1.0',
+        'vendor.qti.imsrtpservice@3.0',
+    ): lib_fixup_vendor_suffix,
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'system/framework/WfdCommon.jar': blob_fixup()
+        .apktool_patch('blob-patches/WfdCommon.patch'),
+    'system_ext/etc/permissions/moto-telephony.xml': blob_fixup()
+        .regex_replace('/system/', '/system_ext/'),
+    'system_ext/lib64/libwfdservice.so': blob_fixup()
+        .replace_needed('android.media.audio.common.types-V4-cpp.so', 'android.media.audio.common.types-V5-cpp.so'),
+    'system_ext/priv-app/ims/ims.apk': blob_fixup()
+        .apktool_patch('ims-patches'),
     (
         'vendor/lib64/camera/components/com.mot.node.c2d.so',
         'vendor/lib64/camera/components/com.qti.node.dewarp.so',
@@ -37,8 +61,17 @@ blob_fixups: blob_fixups_user_type = {
         'vendor/lib64/camera/components/com.vidhance.node.processing.so',
     ): blob_fixup()
         .replace_needed('libui.so', 'libui-v34.so'),
+    (
+        'vendor/lib64/libdpps.so',
+        'vendor/lib64/libsnapdragoncolor-manager.so',
+    ): blob_fixup()
+        .replace_needed('libtinyxml2.so', 'libtinyxml2-v34.so'),
     'vendor/lib64/libmot_chi_desktop_helper.so': blob_fixup()
         .add_needed('libgui_buffer_shim_vendor.so'),
+    'vendor/lib64/libwvhidl.so': blob_fixup()
+        .add_needed('libcrypto_shim.so'),
+    ('vendor/bin/init.kernel.post_boot-blair.sh', 'vendor/bin/init.kernel.post_boot-holi.sh'): blob_fixup()
+        .regex_replace('ro.boot.using_zram_from_fstab', 'ro.vendor.zram.swapon'),
     'vendor/lib64/sensors.moto.so': blob_fixup()
         .add_needed('libbase_shim.so'),
 }  # fmt: skip
@@ -58,8 +91,10 @@ module = ExtractUtilsModule(
     add_generated_carriersettings=True,
 )
 
+module.add_proprietary_file('proprietary-files-fm.txt').add_copy_files_guard(
+    'TARGET_HAS_FM', 'true'
+)
+
 if __name__ == '__main__':
-    utils = ExtractUtils.device_with_common(
-        module, 'sm6375-common', module.vendor
-    )
+    utils = ExtractUtils.device(module)
     utils.run()

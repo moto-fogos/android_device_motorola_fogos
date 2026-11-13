@@ -2,11 +2,20 @@
 masterclear.allow_retain_esim_profiles_after_fdr=true
 ro.telephony.esim_slot_id=1
 
+# eBPF
+ro.bpf.kver_override=5.10.239
+
 # Google
 ro.opa.device_model_id=motorola-fogos
 
+# IMS
+ro.qcom.ims.use_moto_vt_ext=true
+
 # Motorola
 ro.mot.build.customerid=global
+
+# System server
+arm64.memtag.process.system_server=off
 
 # SKU specific properties
 import /product/etc/hardware.sku.${ro.boot.hardware.sku}.prop
