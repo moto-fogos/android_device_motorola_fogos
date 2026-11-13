@@ -222,31 +222,22 @@ PRODUCT_PACKAGES += \
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
-    FrameworksResCommon \
-    FrameworksResProduct \
-    FrameworksResTarget \
-    LineageApertureAppCommon \
-    LineageSdkOverlayCommon \
-    LineageSettingsProviderOverlayCommon \
+    ApertureOverlayFogos \
+    FrameworkOverlayFogos \
+    FrameworkOverlayFogosXT2363-8 \
+    FrameworkOverlayFogosXT2363-9 \
+    LineageSDKOverlayFogos \
+    LineageSettingsProviderOverlayFogos \
     NcmTetheringOverlay \
-    SettingsProviderResCommon \
-    SettingsResCommon \
-    SystemUIResCommon \
-    TelephonyResCommon \
-    TelephonyResProduct \
-    WifiResCommon \
-    WifiResTarget
-
-PRODUCT_PACKAGES += \
-    FrameworksResDevice \
-    FrameworksResDeviceXT2363-8 \
-    FrameworksResDeviceXT2363-9 \
-    LineageApertureAppDevice \
-    ProductFrameworksResDevice \
-    SystemUIResDevice \
-    WifiResDevice \
-    WifiResDeviceXT2363-8 \
-    WifiResDeviceXT2363-9
+    ProductFrameworksOverlayFogos \
+    SettingsOverlayFogos \
+    SettingsProviderOverlayFogos \
+    SystemUIOverlayFogos \
+    TelephonyOverlayFogos \
+    TelephonyProductOverlayFogos \
+    WifiOverlayFogos \
+    WifiOverlayFogosXT2363-8 \
+    WifiOverlayFogosXT2363-9
 
 # Partitions
 PRODUCT_PACKAGES += \

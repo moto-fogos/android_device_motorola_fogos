@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The Linux Foundation
+     SPDX-License-Identifier: BSD-3-Clause
+-->
+<resources>
+    <bool name="config_wifi5ghzSupport">true</bool>
+    <bool name="config_wifi_fast_bss_transition_enabled">true</bool>
+    <bool name="config_wifi_background_scan_support">true</bool>
+    <integer name="config_wifiHardwareSoftapMaxClientCount">32</integer>
+    <bool name="config_wifi_only_link_same_credential_configurations">false</bool>
+    <bool name="config_wifi_softap_acs_supported">true</bool>
+    <bool name="config_wifi_softap_sae_supported">true</bool>
+    <bool name="config_wifi_softap_ieee80211ac_supported">true</bool>
+    <bool name="config_wifi_connected_mac_randomization_supported">true</bool>
+    <bool name="config_wifi_p2p_mac_randomization_supported">true</bool>
+    <bool name="config_wifiSoftapAcsIncludeDfs">true</bool>
+    <integer name="config_wifiDelayDisconnectOnImsLostMs">1000</integer>
+    <bool name="config_wifiMultiStaRestrictedConcurrencyEnabled">true</bool>
+    <bool name="config_wifiAllowMultipleNetworksOnSameAwareNdi">true</bool>
+    <bool name="config_wifiSupportChannelOnDataPath">true</bool>
+    <bool name="config_wifiDriverSupportedNl80211RegChangedEvent">true</bool>
+    <string name="wifi_tether_configure_ssid_default" translatable="false">moto g34 5G</string>
+</resources>

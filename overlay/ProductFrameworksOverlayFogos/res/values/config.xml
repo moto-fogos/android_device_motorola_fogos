@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The Linux Foundation
+     SPDX-License-Identifier: BSD-3-Clause
+-->
+<resources>
+    <string-array name="config_defaultPinnerServiceFiles" translatable="false">
+        <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
+        <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
+        <item>"/system/framework/framework.jar"</item>
+        <item>"/system/framework/services.jar"</item>
+        <item>"/system/bin/surfaceflinger"</item>
+        <item>"/system_ext/priv-app/SystemUI/SystemUI.apk"</item>
+    </string-array>
+    <integer name="config_pinnerHomePinBytes">6291456</integer>
+    <string-array name="config_telephonyEuiccDeviceCapabilities" translatable="false">
+        <item>gsm,9</item>
+        <item>utran,9</item>
+        <item>eutran,15</item>
+    </string-array>
+</resources>
